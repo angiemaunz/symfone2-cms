@@ -14,7 +14,20 @@
                 <p id="logo">CMS Logo</p>
                     <div id="nav">
                         <a href="{{ path('custom_cms_homepage') }}">Home</a>
-                    </div>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            | <a href="{{ path('cms_user') }}">Users</a> |
+                            <a href="{{ path('cms_category') }}">Categories</a> |
+                            <a href="{{ path('cms_page') }}">Pages</a> |
+                        {% elseif is_granted('ROLE_USER') %}
+                            | <a href="{{ path('cms_page') }}">Pages</a> |git status
+                        {% endif %}
+
+                        {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('logout') }}">Logout</a>
+                        {%  endif %}
+
+
+                        </div>
             </div>
 
 
